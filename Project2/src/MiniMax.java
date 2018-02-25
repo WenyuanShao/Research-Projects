@@ -7,15 +7,22 @@ public class MiniMax {
 
     private final int MAX_NUMBER = 1000000;
     private final int[] score = {10,100,1000,10000,100000};
+    public int aaa = 0;
+    public int cut = 0;
 
     public MiniMax() {
-
+        aaa = 0;
+        cut = 0;
     }
 
     public int[] minimaxHelper (int[][] board, int depth, int turn, int m, int alpha_beta) {
+        aaa++;
         int[] temp = new int[3];
         if (depth == 0) {
-            temp[0] = evaluation(board,m);
+            int player = evaluation(board,m,1);
+            int enemy = evaluation(board,m,-1);
+            temp[0] = player-enemy;
+            System.out.println("evaluation:" + temp[0]);
             temp[1] = -1;
             temp[2] = -1;
             return temp;
@@ -32,6 +39,7 @@ public class MiniMax {
                     rewardStep = minimaxHelper(board, depth-1, -turn, m, tempReward);
 
                     if (turn * alpha_beta < turn * tempReward) {
+                        cut++;
                         board[i][j] = 0;
                         break;
                     }
@@ -58,8 +66,8 @@ public class MiniMax {
     }
 
     public boolean checkNeighbour(int[][] board, int row, int col) {
-        for (int i = -2; i <= 2; i++) {
-            for (int j = -2; j <= 2; j++) {
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
                 if (row+i < 0 || row+i > board.length-1 || col+j < 0 || col+j > board.length-1)
                     continue;
                 if (board[row+i][col+j] != 0)
@@ -69,7 +77,8 @@ public class MiniMax {
         return false;
     }
 
-    public int evaluation (int[][] board, int m) {
+    public int evaluation (int[][] board, int m, int player) {
+        //return 0;
         int[] count = new int[5];
 
         for (int i = 0; i < board.length; i++) {
@@ -77,15 +86,20 @@ public class MiniMax {
             int horizon = 0;
             int vertical = 0;
             while (j < board.length) {
-                if (board[i][j] == 1)   horizon++;
+                if (board[i][j] == player) {
+                    horizon++;
+                    if (horizon >= m)   return score[4];
+                }
                 else {
                     if (horizon - m + 4 >= 0) {
-                        System.out.println("horizon: "+horizon);
                         count[horizon - m + 4]++;
                     }
                     horizon = 0;
                 }
-                if (board[j][i] == 1)  vertical++;
+                if (board[j][i] == player) {
+                    vertical++;
+                    if (vertical >= m)  return score[4];
+                }
                 else {
                     if (vertical - m + 4 >= 0) {
                         count[vertical - m + 4]++;
@@ -111,7 +125,10 @@ public class MiniMax {
                 int dia = k - j;
                 int opp = k - board.length + j;
                 if (dia >= 0 && dia <= board.length - 1){
-                    if (board[dia][j] == 1) diagnal++;
+                    if (board[dia][j] == player) {
+                        diagnal++;
+                        if (diagnal >= m) return score[4];
+                    }
                     else {
                         if (diagnal >= m - 4) {
                             count[diagnal - m + 4]++;
@@ -120,7 +137,10 @@ public class MiniMax {
                     }
                 }
                 if (opp >= 0 && opp <= board.length - 1){
-                    if (board[opp][j] == 1) opposite++;
+                    if (board[opp][j] == player) {
+                        opposite++;
+                        if (opposite >= m) return score[4];
+                    }
                     else {
                         if (opposite >= m -4) {
                             count[opposite - m + 4]++;
@@ -150,17 +170,20 @@ class test {
     public static void main (String[] args) {
         Board board = new Board(17,5);
         MiniMax miniMax = new MiniMax();
-        board.board[1][1] = -1;
-        board.board[2][2] = 1;
+        board.board[7][7] = -1;
+        /*board.board[2][2] = 1;
         board.board[3][1] = -1;
         board.board[2][1] = 1;
         board.board[4][3] = -1;
         board.board[2][3] = 1;
-        board.board[2][0] = -1;
+        board.board[2][0] = -1;*/
         //board.board[2][4] = 1;
         //System.out.println(miniMax.evaluation(board.board,4));
-        int[] res = miniMax.minimaxHelper(board.getBoard(),5,1, 5, 100000);
+        int[] res = miniMax.minimaxHelper(board.getBoard(),6,1, 5, 100000);
         System.out.println(res[1]+"    "+res[2]);
+        System.out.println("recursion: "+miniMax.aaa);
+        System.out.println("cut: "+miniMax.cut);
+
         for (int i = 0; i < board.board.length; i++) {
             for (int j = 0; j < board.board.length; j++) {
                 System.out.print(board.board[i][j]+" ");
