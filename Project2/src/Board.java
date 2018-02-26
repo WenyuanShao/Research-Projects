@@ -20,4 +20,22 @@ public class Board {
         return this.board;
     }
 
+    public boolean isFull() {
+        int len = this.board.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if(this.board[i][j] != 0) return false;
+            }
+        }
+        return true;
+    }
+
+    public void move(int row, int col, int turn) {
+        if (this.board[row][col] != 0) {
+            System.exit(0);
+        } else {
+            this.board[row][col] = turn;
+        }
+    }
+
 }

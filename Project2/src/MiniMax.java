@@ -22,7 +22,6 @@ public class MiniMax {
             int player = evaluation(board,m,1);
             int enemy = evaluation(board,m,-1);
             temp[0] = player-enemy;
-            System.out.println("evaluation:" + temp[0]);
             temp[1] = -1;
             temp[2] = -1;
             return temp;
@@ -76,6 +75,16 @@ public class MiniMax {
         }
         return false;
     }
+
+    /*public int evaluationW (int[][] board, int m, int player) {
+        int[] count = new int[5];
+        int n = board.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+
+            }
+        }
+    }*/
 
     public int evaluation (int[][] board, int m, int player) {
         //return 0;
@@ -179,16 +188,31 @@ class test {
         board.board[2][0] = -1;*/
         //board.board[2][4] = 1;
         //System.out.println(miniMax.evaluation(board.board,4));
-        int[] res = miniMax.minimaxHelper(board.getBoard(),6,1, 5, 100000);
-        System.out.println(res[1]+"    "+res[2]);
-        System.out.println("recursion: "+miniMax.aaa);
-        System.out.println("cut: "+miniMax.cut);
-
-        for (int i = 0; i < board.board.length; i++) {
-            for (int j = 0; j < board.board.length; j++) {
-                System.out.print(board.board[i][j]+" ");
+        int turn = 1;
+        int it = 0;
+        while (!board.isFull()){
+            int[] res = miniMax.minimaxHelper(board.getBoard(),4,1, 5, 100000);
+            System.out.println(res[1]+"    "+res[2]);
+            System.out.println("recursion: "+miniMax.aaa);
+            System.out.println("cut: "+miniMax.cut);
+            board.move(res[1],res[2],turn);
+            turn = -turn;
+            for (int i = 0; i < board.board.length; i++) {
+                for (int j = 0; j < board.board.length; j++) {
+                    if (board.board[i][j] == -1) {
+                        System.out.print("X ");
+                    }
+                    if (board.board[i][j] == 1) {
+                        System.out.print("O ");
+                    }
+                    if (board.board[i][j] == 0) {
+                        System.out.print("_ ");
+                    }
+                }
+                System.out.println();
             }
-            System.out.println();
+            it++;
+            System.out.println("---------------------------------------------");
         }
     }
 }
