@@ -5,6 +5,13 @@ public class Board {
     public int[][] board;
     public int size;
     public int m;
+    public final int[] score = {
+            10,
+            100,
+            1000,
+            10000,
+            100000
+    };
 
     public Board() {
 
@@ -31,11 +38,14 @@ public class Board {
     }
 
     public void move(int row, int col, int turn) {
+        System.out.println("row: "+row +"     col: "+col);
         if (this.board[row][col] != 0) {
             System.exit(0);
         } else {
             this.board[row][col] = turn;
         }
     }
+
+
 
 }
