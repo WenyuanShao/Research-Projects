@@ -19,16 +19,16 @@
       <file leaf-file-name="MiniMax.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MiniMax.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="904">
-              <caret line="414" column="20" lean-forward="false" selection-start-line="414" selection-start-column="20" selection-end-line="414" selection-end-column="20" />
+            <state relative-caret-position="285">
+              <caret line="395" column="48" lean-forward="false" selection-start-line="395" selection-start-column="48" selection-end-line="395" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#minimaxHelper#0;class#MiniMax#0" expanded="false" />
                 <element signature="e#3084#3121#0" expanded="false" />
                 <element signature="method#checkNeighbour#0;class#MiniMax#0" expanded="false" />
-                <marker date="1519766670641" expanded="false" signature="2290:2839" ph="{...}" />
-                <marker date="1519766670641" expanded="false" signature="5279:8014" ph="{...}" />
-                <marker date="1519766670641" expanded="false" signature="8092:11758" ph="{...}" />
+                <marker date="1519789891211" expanded="false" signature="2290:2839" ph="{...}" />
+                <marker date="1519789891211" expanded="false" signature="5279:8014" ph="{...}" />
+                <marker date="1519789891211" expanded="false" signature="8092:11758" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -37,8 +37,8 @@
       <file leaf-file-name="Heuristic.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Heuristic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+            <state relative-caret-position="-62">
+              <caret line="34" column="30" lean-forward="false" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -74,11 +74,11 @@
       <file leaf-file-name="Evaluator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Evaluator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+            <state relative-caret-position="294">
+              <caret line="167" column="6" lean-forward="false" selection-start-line="167" selection-start-column="6" selection-end-line="167" selection-end-column="6" />
               <folding>
-                <element signature="e#210#211#0" expanded="true" />
-                <element signature="e#236#237#0" expanded="true" />
+                <element signature="e#213#214#0" expanded="true" />
+                <element signature="e#239#240#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -111,10 +111,10 @@
         <option value="$PROJECT_DIR$/src/Window.java" />
         <option value="$PROJECT_DIR$/src/AIPlayer.java" />
         <option value="$PROJECT_DIR$/src/Point.java" />
-        <option value="$PROJECT_DIR$/src/Evaluator.java" />
         <option value="$PROJECT_DIR$/src/pointScore.java" />
         <option value="$PROJECT_DIR$/src/Board.java" />
         <option value="$PROJECT_DIR$/src/Heurist.java" />
+        <option value="$PROJECT_DIR$/src/Evaluator.java" />
         <option value="$PROJECT_DIR$/src/Heuristic.java" />
         <option value="$PROJECT_DIR$/src/MiniMax.java" />
       </list>
@@ -127,6 +127,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="-1" />
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="821" />
@@ -853,15 +854,15 @@
       <workItem from="1519670732570" duration="548000" />
       <workItem from="1519671326427" duration="5096000" />
       <workItem from="1519684994303" duration="9054000" />
-      <workItem from="1519745461247" duration="14980000" />
+      <workItem from="1519745461247" duration="28503000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113594000" />
+    <option name="totallyTimeSpent" value="127117000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="821" extended-state="6" />
+    <frame x="-1" y="23" width="1440" height="821" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -873,7 +874,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25925925" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43758574" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -930,9 +931,9 @@
             <element signature="method#minimaxHelper#0;class#MiniMax#0" expanded="false" />
             <element signature="e#3084#3121#0" expanded="false" />
             <element signature="method#checkNeighbour#0;class#MiniMax#0" expanded="false" />
-            <marker date="1519766670641" expanded="false" signature="2290:2839" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="5279:8014" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="8092:11758" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="2290:2839" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="5279:8014" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="8092:11758" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -956,9 +957,9 @@
             <element signature="method#minimaxHelper#0;class#MiniMax#0" expanded="false" />
             <element signature="e#3084#3121#0" expanded="false" />
             <element signature="method#checkNeighbour#0;class#MiniMax#0" expanded="false" />
-            <marker date="1519766670641" expanded="false" signature="2290:2839" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="5279:8014" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="8092:11758" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="2290:2839" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="5279:8014" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="8092:11758" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -982,9 +983,9 @@
             <element signature="method#minimaxHelper#0;class#MiniMax#0" expanded="false" />
             <element signature="e#3084#3121#0" expanded="false" />
             <element signature="method#checkNeighbour#0;class#MiniMax#0" expanded="false" />
-            <marker date="1519766670641" expanded="false" signature="2290:2839" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="5279:8014" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="8092:11758" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="2290:2839" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="5279:8014" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="8092:11758" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1008,9 +1009,9 @@
             <element signature="method#minimaxHelper#0;class#MiniMax#0" expanded="false" />
             <element signature="e#3084#3121#0" expanded="false" />
             <element signature="method#checkNeighbour#0;class#MiniMax#0" expanded="false" />
-            <marker date="1519766670641" expanded="false" signature="2290:2839" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="5279:8014" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="8092:11758" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="2290:2839" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="5279:8014" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="8092:11758" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1034,9 +1035,9 @@
             <element signature="method#minimaxHelper#0;class#MiniMax#0" expanded="false" />
             <element signature="e#3084#3121#0" expanded="false" />
             <element signature="method#checkNeighbour#0;class#MiniMax#0" expanded="false" />
-            <marker date="1519766670641" expanded="false" signature="2290:2839" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="5279:8014" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="8092:11758" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="2290:2839" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="5279:8014" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="8092:11758" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1060,9 +1061,9 @@
             <element signature="method#minimaxHelper#0;class#MiniMax#0" expanded="false" />
             <element signature="e#3084#3121#0" expanded="false" />
             <element signature="method#checkNeighbour#0;class#MiniMax#0" expanded="false" />
-            <marker date="1519766670641" expanded="false" signature="2290:2839" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="5279:8014" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="8092:11758" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="2290:2839" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="5279:8014" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="8092:11758" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1086,9 +1087,9 @@
             <element signature="method#minimaxHelper#0;class#MiniMax#0" expanded="false" />
             <element signature="e#3084#3121#0" expanded="false" />
             <element signature="method#checkNeighbour#0;class#MiniMax#0" expanded="false" />
-            <marker date="1519766670641" expanded="false" signature="2290:2839" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="5279:8014" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="8092:11758" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="2290:2839" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="5279:8014" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="8092:11758" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1112,9 +1113,9 @@
             <element signature="method#minimaxHelper#0;class#MiniMax#0" expanded="false" />
             <element signature="e#3084#3121#0" expanded="false" />
             <element signature="method#checkNeighbour#0;class#MiniMax#0" expanded="false" />
-            <marker date="1519766670641" expanded="false" signature="2290:2839" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="5279:8014" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="8092:11758" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="2290:2839" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="5279:8014" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="8092:11758" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1134,22 +1135,22 @@
     <entry file="file://$PROJECT_DIR$/src/Window.java" />
     <entry file="file://$PROJECT_DIR$/src/TicTacToeAI.java" />
     <entry file="file://$PROJECT_DIR$/src/AIPlayer.java" />
-    <entry file="file://$PROJECT_DIR$/src/Evaluator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-          <folding>
-            <element signature="e#210#211#0" expanded="true" />
-            <element signature="e#236#237#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Board.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="502">
           <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Evaluator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="167" column="6" lean-forward="false" selection-start-line="167" selection-start-column="6" selection-end-line="167" selection-end-column="6" />
+          <folding>
+            <element signature="e#213#214#0" expanded="true" />
+            <element signature="e#239#240#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1170,24 +1171,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Heuristic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+        <state relative-caret-position="-62">
+          <caret line="34" column="30" lean-forward="false" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MiniMax.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="904">
-          <caret line="414" column="20" lean-forward="false" selection-start-line="414" selection-start-column="20" selection-end-line="414" selection-end-column="20" />
+        <state relative-caret-position="285">
+          <caret line="395" column="48" lean-forward="false" selection-start-line="395" selection-start-column="48" selection-end-line="395" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#minimaxHelper#0;class#MiniMax#0" expanded="false" />
             <element signature="e#3084#3121#0" expanded="false" />
             <element signature="method#checkNeighbour#0;class#MiniMax#0" expanded="false" />
-            <marker date="1519766670641" expanded="false" signature="2290:2839" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="5279:8014" ph="{...}" />
-            <marker date="1519766670641" expanded="false" signature="8092:11758" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="2290:2839" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="5279:8014" ph="{...}" />
+            <marker date="1519789891211" expanded="false" signature="8092:11758" ph="{...}" />
           </folding>
         </state>
       </provider>

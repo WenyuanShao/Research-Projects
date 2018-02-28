@@ -355,7 +355,7 @@ public class MiniMax {
 
     public List<pointScore> getpoints (int[][] board, int m, int turn) {
         int len = board.length;
-        Evaluator evaluator = new Evaluator(m);
+        Heuristic heuristic = new Heuristic();
         List<pointScore> res = new ArrayList<>();
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
@@ -363,9 +363,7 @@ public class MiniMax {
                     int row = i;
                     int col = j;
                     board[i][j] = turn;
-                    double score1 = evaluator.evaBoard(board,1);
-                    double score2 = evaluator.evaBoard(board,-1);
-                    double score = score1 - GAMMA * score2;
+                    double score = heuristic.HeuristicValue(board,row,col,m);
                     board[i][j] = 0;
                     res.add(new pointScore(row,col,score));
                 }
@@ -373,10 +371,6 @@ public class MiniMax {
         }
         if (turn == 1) {
             Collections.sort(res, Comparator.comparingDouble(pointScore::getScore).reversed());
-            for (int i = 0; i < 5; i++) {
-                System.out.println("list: "+ res.get(i).getScore());
-            }
-            System.out.println();
         } else {
             Collections.sort(res, Comparator.comparingDouble(pointScore::getScore));
         }
@@ -399,7 +393,7 @@ class test {
         int turn = 1;
         int it = 0;
         while (!board.isFull()){
-            double[] res = miniMax.minimaxHelper(board.getBoard(),4,1, 5, 100000);
+            double[] res = miniMax.minimaxHelper2(board.getBoard(),4,1, 5, 100000);
             System.out.println(res[0]+"     "+res[1]+"    "+res[2]);
             System.out.println("recursion: "+miniMax.aaa);
             System.out.println("cut: "+miniMax.cut);

@@ -5,8 +5,8 @@ public class Evaluator {
 
     private int m;
 
-    private final double BONUS = 1.0;
-    public static final int SCORE_WIN = 999999;
+    private final double BONUS = 1.5;
+    public static final double SCORE_WIN = 999999;
 
     public Evaluator(int m) {
         this.m = m;
@@ -41,7 +41,7 @@ public class Evaluator {
                 if (sum == m) {
                     return SCORE_WIN;
                 }
-                score[sum] += Math.pow(m / (m-BONUS * MaxCount), 2);
+                score[sum] += m + BONUS * MaxCount;
             }
         }
 
@@ -68,7 +68,7 @@ public class Evaluator {
                 if (sum == m) {
                     return SCORE_WIN;
                 }
-                score[sum] += Math.pow(m / (m-BONUS * MaxCount), 2);
+                score[sum] += m + BONUS * MaxCount;
             }
         }
 
@@ -100,7 +100,7 @@ public class Evaluator {
                 if (sum == m) {
                     return SCORE_WIN;
                 }
-                score[sum] += Math.pow(m / (m-BONUS * MaxCount), 2);
+                score[sum] += m + BONUS * MaxCount;
                 i++;j++;
             }
             if (row > 0) {
@@ -110,7 +110,7 @@ public class Evaluator {
             }
         }
 
-        //oppsite (/)
+        //opposite (/)
         row = m - 1;
         col = 0;
         while (col < len - m) {
@@ -136,7 +136,7 @@ public class Evaluator {
                 }
                 MaxCount = Math.max(MaxCount, count);
                 if (sum == m)   return SCORE_WIN;
-                score[sum] += Math.pow(m / (m-BONUS * MaxCount), 2);
+                score[sum] += m + BONUS * MaxCount;
                 i--;
                 j++;
             }
@@ -153,19 +153,17 @@ public class Evaluator {
     }
 
     /*public static void main (String[] args) {
-        Evaluator e1 = new Evaluator(5, 1);
+        Evaluator e1 = new Evaluator(5);
         int[][] b = new int[15][15];
-        b[1][5] = 1;
-        b[2][4] = 1;
+        b[1][1] = 1;
+        b[2][2] = 1;
         b[3][3] = 1;
-        b[4][2] = 1;
-        b[6][0] = 1;
+        b[4][4] = 1;
+        b[6][6] = 1;
         /*double prevScore = e1.evaluateWholeBoard(b);
         System.out.println(prevScore);
-        b[7][7] = 1;
-        System.out.println(e1.evaluateWholeBoard(b));
-        System.out.println(e1.evaluateBoard(b, prevScore, 1, 7, 7));
-        double score = e1.evaBoard(b,1);
-        System.out.println(score);
-    }*/
+        b[7][7] = 1;*/
+     //   double score = e1.evaBoard(b,1);
+     //   System.out.println(score);
+     //}
 }
