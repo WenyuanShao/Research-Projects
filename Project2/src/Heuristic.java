@@ -10,7 +10,7 @@ public class Heuristic {
 
     }
 
-    public double HeuristicValue (int[][] board, int row, int col, int m) {
+    public double HeuristicValue (int[][] board, int row, int col, int m, int turn) {
 
         int len = board.length;
 
@@ -47,9 +47,17 @@ public class Heuristic {
         while (row + dr < len - 1 && col + dr < len - 1 && dr < m - 1) {
             dr++;
         }
+        board[row][col] = 0;
         double selfScore = evaPoint(r,l,u,d,ul,ur,dl,dr,row,col,board,1,m);
         double enemyScore = evaPoint(r,l,u,d,ul,ur,dl,dr,row,col,board,-1,m);
-        double score = selfScore- enemyScore * GAMMA;
+        double score_not_place = selfScore - enemyScore * GAMMA;
+
+        board[row][col] = turn;
+        selfScore = evaPoint(r,l,u,d,ul,ur,dl,dr,row,col,board,1,m);
+        enemyScore = evaPoint(r,l,u,d,ul,ur,dl,dr,row,col,board,-1,m);
+        double score_place = selfScore- enemyScore * GAMMA;
+
+        double score = score_place - score_not_place;
         return score;
     }
 

@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
+import java.util.*;
 
 /**
  * Created by shaowenyuan on 20/02/2018.
@@ -10,29 +9,107 @@ public class MiniMax {
 
     private final int MAX_NUMBER = 1000000;
     private final double GAMMA = 1.5;
-    private final int[] score = {
-            10,
-            100,
-            1000,
-            10000,
-            100000
-    };
     public int aaa = 0;
     public int cut = 0;
+    public int leaf = 0;
     public int test = 0;
 
     public MiniMax() {
         aaa = 0;
         cut = 0;
     }
+/*
+    public int[] getPosition(int[][] board, int m , int turn) {
+        List<pointScore> list = getpoints(board,m,turn);
+        int row = -1;
+        int col = -1;
+        double score = Integer.MIN_VALUE;
+
+        for(int k = 0; k <list.size(); k++) {
+            int i = list.get(k).getRow();
+            int j = list.get(k).getCol();
+            board[i][j] = turn;
+            double temp = play(board,4,Integer.MIN_VALUE,Integer.MAX_VALUE,turn,m);
+            board[i][j] = 0;
+            if (temp > score) {
+                row = i;
+                col = j;
+                score = temp;
+            }
+        }
+        int[] res = new int[2];
+        res[0] = row;
+        res[1] = col;
+        return res;
+    }
+
+    public double play (int[][] board, int depth, double alpha, double beta, int turn, int m) {
+
+        double temp = 0;
+
+        if (depth == 0) {
+            Evaluator evaluator = new Evaluator(m);
+            double player = evaluator.evaBoard(board,1);
+            double enemy = evaluator.evaBoard(board, -1);
+            temp = player - (enemy * GAMMA);
+            return temp;
+        }
+
+        if (turn == 1) {
+            List<pointScore> list = getpoints(board,m,turn);
+
+            aaa++;
+
+            int searchSpace = list.size();
+            double best = Integer.MIN_VALUE;
+
+            for (int k = 0; k < searchSpace; k++) {
+                int row = list.get(k).getRow();
+                int col = list.get(k).getCol();
+
+
+                board[row][col] = turn;
+                best = Math.max(play(board,depth-1,alpha,beta,-turn,m),best);
+                board[row][col] = 0;
+                alpha = Math.max(best,alpha);
+                if (beta <= alpha) {
+                    cut++;
+                    break;
+                }
+            }
+            return best;
+        } else {
+            List<pointScore> list = getpoints(board,m,turn);
+
+            aaa++;
+
+            int searchSpace = list.size();
+            double best = Integer.MAX_VALUE;
+            for (int k = 0; k < searchSpace; k++) {
+                int row = list.get(k).getRow();
+                int col = list.get(k).getCol();
+
+                board[row][col] = turn;
+
+                best = Math.max(play(board,depth-1,alpha,best,-turn,m),best);
+                board[row][col] = 0;
+                beta = Math.min(best,beta);
+                if (beta <= alpha) {
+                    cut++;
+                    break;
+                }
+            }
+            return best;
+        }
+    }
+*/
 
     public double[] minimaxHelper2 (int[][] board, int depth, int turn , int m, double alpha_beta) {
         double [] temp = new double[3];
         aaa++;
         if (depth == 0) {
+            leaf++;
             Evaluator evaluator = new Evaluator(m);
-            //int player = evaluation(board,m,1);
-            //int enemy = evaluation(board,m,-1)*2;
             double player = evaluator.evaBoard(board, 1);
             double enemy = evaluator.evaBoard(board, -1);
             temp[0] = player - (enemy * GAMMA);
@@ -44,32 +121,36 @@ public class MiniMax {
         double[] rewardStep = {-turn * MAX_NUMBER, -1, -1};
         double tempReward = rewardStep[0];
         double[] tempchoice = {-1, -1};
-        //if (turn == 1) {
-            List<pointScore> list = getpoints(board,m,turn);
-            int searchBreadth = list.size();
-            for (int i = 0; i < searchBreadth; i++) {
-                int row = list.get(i).getRow();
-                int col = list.get(i).getCol();
-                board[row][col] = turn;
 
-                rewardStep = minimaxHelper2(board, depth-1, -turn, m, tempReward);
-                board[row][col] = 0;
+        List<pointScore> list = getpoints(board,m,turn);
 
-                if (turn * alpha_beta < turn * tempReward) {
-                    cut++;
-                    continue;
-                }
-                if (turn * rewardStep[0] > turn * tempReward) {
-                    tempReward = rewardStep[0];
-                    tempchoice[0] = row;
-                    tempchoice[1] = col;
-                }
+        for (pointScore point : list) {
+            int row = point.getRow();
+            int col = point.getCol();
+
+            if(!checkNeighbour(board,row,col)) {
+                break;
             }
-            rewardStep[0] = tempReward;
-            rewardStep[1] = tempchoice[0];
-            rewardStep[2] = tempchoice[1];
-            return rewardStep;
-        //}
+            board[row][col] = turn;
+
+            rewardStep = minimaxHelper2(board, depth-1, -turn, m, tempReward);
+            board[row][col] = 0;
+
+            if (turn * rewardStep[0] > turn * tempReward) {
+                tempReward = rewardStep[0];
+                tempchoice[0] = row;
+                tempchoice[1] = col;
+            }
+
+            if (turn * alpha_beta <= turn * tempReward) {
+                cut++;
+                break;
+            }
+        }
+        rewardStep[0] = tempReward;
+        rewardStep[1] = tempchoice[0];
+        rewardStep[2] = tempchoice[1];
+        return rewardStep;
     }
 
     public void printBoard(int[][] board) {
@@ -94,9 +175,8 @@ public class MiniMax {
         aaa++;
         double[] temp = new double[3];
         if (depth == 0) {
+            leaf++;
             Evaluator evaluator = new Evaluator(m);
-            //int player = evaluation(board,m,1);
-            //int enemy = evaluation(board,m,-1)*2;
             double player = evaluator.evaBoard(board, 1);
             double enemy = evaluator.evaBoard(board, -1);
             temp[0] = player - (enemy * GAMMA);
@@ -112,27 +192,22 @@ public class MiniMax {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 if (board[i][j] == 0 && checkNeighbour(board,i,j)) {
+                    //System.out.println("row: "+i+"  col:" + j);
                     board[i][j] = turn;
                     rewardStep = minimaxHelper(board, depth-1, -turn, m, tempReward);
+                    board[i][j] = 0;
 
-                    if (turn * alpha_beta < turn * tempReward) {
-                        cut++;
-                        board[i][j] = 0;
-                        break;
-                    }
                     if (turn * rewardStep[0] > turn * tempReward) {
                         tempReward = rewardStep[0];
                         tempchoice[0] = i;
                         tempchoice[1] = j;
                     }
-                    board[i][j] = 0;
 
-                    /*for (int p = 0; p < board.length; p++) {
-                        for (int q = 0; q < board.length; q++) {
-                            System.out.print(board[p][q]+" ");
-                        }
-                        System.out.println();
-                    }*/
+                    if (turn * alpha_beta <= turn * tempReward) {
+                        cut++;
+                        board[i][j] = 0;
+                        break;
+                    }
                 }
             }
         }
@@ -241,7 +316,6 @@ public class MiniMax {
         return res;
     }
     */
-
     /*
     public int evaluation2 (int[][] board, int m, int player) {
         //return 0;
@@ -356,6 +430,7 @@ public class MiniMax {
     public List<pointScore> getpoints (int[][] board, int m, int turn) {
         int len = board.length;
         Heuristic heuristic = new Heuristic();
+        Evaluator evaluator = new Evaluator(m);
         List<pointScore> res = new ArrayList<>();
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
@@ -363,7 +438,8 @@ public class MiniMax {
                     int row = i;
                     int col = j;
                     board[i][j] = turn;
-                    double score = heuristic.HeuristicValue(board,row,col,m);
+                    double score = heuristic.HeuristicValue(board,row,col,m,turn);
+                    //double score = evaluator.evaBoard(board,turn) - GAMMA * evaluator.evaBoard(board,-turn);
                     board[i][j] = 0;
                     res.add(new pointScore(row,col,score));
                 }
@@ -378,43 +454,4 @@ public class MiniMax {
     }
 }
 
-class test {
-    public static void main (String[] args) {
-        Board board = new Board(17,5);
-        MiniMax miniMax = new MiniMax();
-        board.board[7][7] = -1;
-        /*board.board[7][6] = 1;
-        board.board[6][7] = -1;
-        board.board[6][5] = 1;
-        board.board[5][6] = -1;
-        board.board[5][4] = 1;
-        board.board[8][7] = -1;*/
-        //board.board[2][4] = 1;
-        int turn = 1;
-        int it = 0;
-        while (!board.isFull()){
-            double[] res = miniMax.minimaxHelper2(board.getBoard(),4,1, 5, 100000);
-            System.out.println(res[0]+"     "+res[1]+"    "+res[2]);
-            System.out.println("recursion: "+miniMax.aaa);
-            System.out.println("cut: "+miniMax.cut);
-            board.move((int)res[1],(int)res[2],turn);
-            turn = -turn;
-            for (int i = 0; i < board.board.length; i++) {
-                for (int j = 0; j < board.board.length; j++) {
-                    if (board.board[i][j] == -1) {
-                        System.out.print("X ");
-                    }
-                    if (board.board[i][j] == 1) {
-                        System.out.print("O ");
-                    }
-                    if (board.board[i][j] == 0) {
-                        System.out.print("_ ");
-                    }
-                }
-                System.out.println();
-            }
-            it++;
-            System.out.println("---------------------------------------------");
-        }
-    }
-}
+
