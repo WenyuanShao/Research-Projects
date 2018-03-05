@@ -452,6 +452,10 @@ public class MiniMax {
         }
         return res;
     }
+
+    /*public List<pointScore> checkMate (int[][] board, int m, int turn) {
+
+    }*/
 }
 
 
