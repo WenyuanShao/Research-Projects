@@ -5,20 +5,40 @@ import java.util.*;
 /**
  * Created by shaowenyuan on 20/02/2018.
  */
-public class MiniMax {
+public class AIPlayer {
 
     private final int MAX_NUMBER = 1000000;
     private final double GAMMA = 1.5;
-    public int aaa = 0;
-    public int cut = 0;
-    public int leaf = 0;
-    public int test = 0;
+    private final int SearchSpace = 16;
+    public int aaa;
+    public int cut;
+    public int leaf;
+    public int test;
+    public int turn;
 
-    public MiniMax() {
+    public AIPlayer() {
         aaa = 0;
         cut = 0;
+        leaf = 0;
+        test = 0;
     }
-/*
+
+    public AIPlayer(int turn) {
+        this.aaa = 0;
+        this.cut = 0;
+        this.leaf = 0;
+        this.test = 0;
+        this.turn = turn;
+    }
+
+    public void reSet () {
+        this.aaa = 0;
+        this.cut = 0;
+        this.leaf = 0;
+        this.test = 0;
+    }
+
+    /*
     public int[] getPosition(int[][] board, int m , int turn) {
         List<pointScore> list = getpoints(board,m,turn);
         int row = -1;
@@ -42,7 +62,9 @@ public class MiniMax {
         res[1] = col;
         return res;
     }
+*/
 
+/*
     public double play (int[][] board, int depth, double alpha, double beta, int turn, int m) {
 
         double temp = 0;
@@ -123,10 +145,17 @@ public class MiniMax {
         double[] tempchoice = {-1, -1};
 
         List<pointScore> list = getpoints(board,m,turn);
+        int listLength = list.size();
+        int Search = Math.min(listLength,SearchSpace);
 
-        for (pointScore point : list) {
-            int row = point.getRow();
-            int col = point.getCol();
+
+        for (int i = 0; i < Search; i++) {
+        //for (pointScore point : list) {
+            //int row = point.getRow();
+            //int col = point.getCol();
+
+            int row = list.get(i).getRow();
+            int col = list.get(i).getCol();
 
             if(!checkNeighbour(board,row,col)) {
                 break;
@@ -228,6 +257,7 @@ public class MiniMax {
         }
         return false;
     }
+
     /*
     public int evaluation (int[][] board, int m, int player) {
         //return 0;
@@ -316,6 +346,7 @@ public class MiniMax {
         return res;
     }
     */
+
     /*
     public int evaluation2 (int[][] board, int m, int player) {
         //return 0;
@@ -453,9 +484,6 @@ public class MiniMax {
         return res;
     }
 
-    /*public List<pointScore> checkMate (int[][] board, int m, int turn) {
-
-    }*/
 }
 
 
