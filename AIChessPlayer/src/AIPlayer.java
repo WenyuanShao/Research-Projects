@@ -64,67 +64,101 @@ public class AIPlayer {
     }
 */
 
-/*
-    public double play (int[][] board, int depth, double alpha, double beta, int turn, int m) {
+    public boolean isFull(int[][] board) {
+        int len = board.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                if(board[i][j] == 0) return false;
+            }
+        }
+        return true;
+    }
 
-        double temp = 0;
+    public double[] play (int[][] board, int depth, double alpha, double beta, int turn, int m) {
+        aaa++;
+        double[] temp = new double[3];
 
-        if (depth == 0) {
+        if (depth == 0 || isFull(board)) {
             Evaluator evaluator = new Evaluator(m);
             double player = evaluator.evaBoard(board,1);
             double enemy = evaluator.evaBoard(board, -1);
-            temp = player - (enemy * GAMMA);
+            temp[0] = player - (enemy * GAMMA);
+            temp[1] = -1;
+            temp[2] = -1;
             return temp;
         }
 
+        double[] rewardStep = {-turn * MAX_NUMBER, -1, -1};
+        double tempReward;
+        double[] tempchoice = {-1, -1};
+
+        // Max level
         if (turn == 1) {
             List<pointScore> list = getpoints(board,m,turn);
+            int listLength = list.size();
+            int Search = Math.min(listLength,SearchSpace);
 
-            aaa++;
+            tempReward = Integer.MIN_VALUE;
 
-            int searchSpace = list.size();
-            double best = Integer.MIN_VALUE;
-
-            for (int k = 0; k < searchSpace; k++) {
+            for (int k = 0; k < Search; k++) {
                 int row = list.get(k).getRow();
                 int col = list.get(k).getCol();
 
-
                 board[row][col] = turn;
-                best = Math.max(play(board,depth-1,alpha,beta,-turn,m),best);
+                rewardStep = play(board,depth-1,alpha,beta,-turn,m);
+                if (rewardStep[0] > tempReward) {
+                    tempReward = rewardStep[0];
+                    tempchoice[0] = row;
+                    tempchoice[1] = col;
+                }
                 board[row][col] = 0;
-                alpha = Math.max(best,alpha);
+                alpha = Math.max(tempReward,alpha);
                 if (beta <= alpha) {
                     cut++;
                     break;
                 }
             }
-            return best;
-        } else {
-            List<pointScore> list = getpoints(board,m,turn);
-
-            aaa++;
-
-            int searchSpace = list.size();
-            double best = Integer.MAX_VALUE;
-            for (int k = 0; k < searchSpace; k++) {
-                int row = list.get(k).getRow();
-                int col = list.get(k).getCol();
-
-                board[row][col] = turn;
-
-                best = Math.max(play(board,depth-1,alpha,best,-turn,m),best);
-                board[row][col] = 0;
-                beta = Math.min(best,beta);
-                if (beta <= alpha) {
-                    cut++;
-                    break;
-                }
-            }
-            return best;
+            rewardStep[0] = tempReward;
+            rewardStep[1] = tempchoice[0];
+            rewardStep[2] = tempchoice[1];
+            return rewardStep;
         }
+
+        //Min level
+        if (turn == -1) {
+            List<pointScore> list = getpoints(board,m,turn);
+            int listLength = list.size();
+            int Search = Math.min(listLength,SearchSpace);
+
+            tempReward = Integer.MAX_VALUE;
+
+            for (int k = 0; k < Search; k++) {
+                int row = list.get(k).getRow();
+                int col = list.get(k).getCol();
+
+                board[row][col] = turn;
+                rewardStep = play(board,depth-1,alpha,beta,-turn,m);
+                if (rewardStep[0] < tempReward) {
+                    tempReward = rewardStep[0];
+                    tempchoice[0] = row;
+                    tempchoice[1] = col;
+                }
+                board[row][col] = 0;
+                beta = Math.min(tempReward,beta);
+                if (beta <= alpha) {
+                    cut++;
+                    break;
+                }
+            }
+            rewardStep[0] = tempReward;
+            rewardStep[1] = tempchoice[0];
+            rewardStep[2] = tempchoice[1];
+            return rewardStep;
+        }
+        System.out.println("out");
+        return rewardStep;
     }
-*/
+
 
     public double[] minimaxHelper2 (int[][] board, int depth, int turn , int m, double alpha_beta) {
         double [] temp = new double[3];

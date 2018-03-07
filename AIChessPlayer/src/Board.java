@@ -31,6 +31,17 @@ public class Board {
         int len = this.board.length;
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
+                if(this.board[i][j] == 0) return false;
+            }
+        }
+        System.out.println("It's over");
+        return true;
+    }
+
+    public boolean isEmptyl() {
+        int len = this.board.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
                 if(this.board[i][j] != 0) return false;
             }
         }
@@ -39,6 +50,7 @@ public class Board {
 
     public void move(int row, int col, int turn) {
         if (this.board[row][col] != 0) {
+            System.out.println("you can not put here!!!!!");
             System.exit(0);
         } else {
             this.board[row][col] = turn;

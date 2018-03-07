@@ -153,17 +153,23 @@ public class Evaluator {
     }
 
     /*public static void main (String[] args) {
-        Evaluator e1 = new Evaluator(5);
-        int[][] b = new int[15][15];
-        b[1][1] = 1;
+        Evaluator e1 = new Evaluator(4);
+        int[][] b = new int[4][4];
+        b[1][1] = -1;
+        b[1][0] = 1;
+        b[0][0] = -1;
         b[2][2] = 1;
+        b[0][2] = -1;
         b[3][3] = 1;
-        b[4][4] = 1;
-        b[6][6] = 1;
+        b[2][1] = -1;
+        b[2][0] = 1;
+        b[3][0] = -1;
+        b[0][1] = 1;
+        b[1][2] = -1;
         /*double prevScore = e1.evaluateWholeBoard(b);
         System.out.println(prevScore);
         b[7][7] = 1;*/
-     //   double score = e1.evaBoard(b,1);
-     //   System.out.println(score);
-     //}
+    //    double score = e1.evaBoard(b,1);
+    //    System.out.println(score);
+    // }
 }
