@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by shaowenyuan on 04/03/2018.
  */
@@ -6,11 +10,12 @@ public class test {
 
     public static final int HUMAN_TURN = -1;
     public static final int AI_TURN = 1;
-    public static final int SIZE = 4;
-    public static final int M = 4;
+    public static final int SIZE = 12;
+    public static final int M = 6;
     public static final int WINNING_SCORE = 999999;
     public static final int DEPTH = 6;
 
+    // Test functions
     public static void AIvsAI (){
         Board board = new Board(SIZE,M);
         AIPlayer aiPlayer1 = new AIPlayer(AI_TURN);
@@ -69,6 +74,48 @@ public class test {
         return;
     }
 
+    // Online function
+    public static void onlineTest () throws IOException, InterruptedException{
+        httpHelper httpHelper = new httpHelper();
+        Board board = new Board(SIZE,M);
+        AIPlayer aiPlayer = new AIPlayer(AI_TURN);
+
+        while (!board.isFull()) {
+            getMovesResult moves = httpHelper.getMoves(1);
+
+            if (moves.moves.size() == 0) {
+                int row = SIZE/2;
+                int col = SIZE/2;
+                System.out.println("turn: Our Group     row: "+row + "     col: " + col);
+                board.move(row, col, AI_TURN);
+            } else if (!moves.moves.get(0).teamId.equals("1066")) {
+                // enemy move
+                System.out.println("teamId: " + moves.moves.get(0).teamId);
+                String s = moves.moves.get(0).move;
+                int enemyRow = Integer.parseInt(s.split(",")[0]);
+                int enemyCol = Integer.parseInt(s.split(",")[1]);
+
+                System.out.println("turn: Opposite Group     row: "+enemyRow + "     col: " + enemyCol);
+                board.move(enemyRow, enemyCol, -AI_TURN);
+
+                // AI move
+                double[] AIMove = aiPlayer.play(board.getBoard(),DEPTH,Integer.MIN_VALUE,Integer.MAX_VALUE,AI_TURN,M);
+                System.out.println("turn: Our Group     row: "+AIMove[0] + "     col: " + AIMove[1]);
+                board.move((int)AIMove[0], (int)AIMove[1], AI_TURN);
+                printLog(aiPlayer);
+
+                //Reset the variables
+                aiPlayer.reSet();
+            } else {
+                System.out.println("The opposite team doesn't move!");
+                TimeUnit.SECONDS.sleep(5);
+                continue;
+            }
+
+            board.printBoard();
+        }
+    }
+
     public static void printLog(AIPlayer aiPlayer) {
         //Print reward message;
 
@@ -82,6 +129,11 @@ public class test {
 
     public static void main (String[] args) {
         //AIvsHuman();
-        AIvsAI();
+        //AIvsAI();
+        try {
+            onlineTest();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
