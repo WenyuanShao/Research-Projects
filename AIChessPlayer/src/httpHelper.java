@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 public class httpHelper {
     public String userId = "436";
     public String teamId = "1066";
-    public String gameId = "1075";
+    public String gameId = "1175";
     public String api_key = "f53aeb70ae282429a7cc";
 
 

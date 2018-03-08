@@ -88,6 +88,7 @@ public class test {
                 int col = SIZE/2;
                 System.out.println("turn: Our Group     row: "+row + "     col: " + col);
                 board.move(row, col, AI_TURN);
+                httpHelper.makeMove(row+","+col);
             } else if (!moves.moves.get(0).teamId.equals("1066")) {
                 // enemy move
                 System.out.println("teamId: " + moves.moves.get(0).teamId);
@@ -100,8 +101,9 @@ public class test {
 
                 // AI move
                 double[] AIMove = aiPlayer.play(board.getBoard(),DEPTH,Integer.MIN_VALUE,Integer.MAX_VALUE,AI_TURN,M);
-                System.out.println("turn: Our Group     row: "+AIMove[0] + "     col: " + AIMove[1]);
-                board.move((int)AIMove[0], (int)AIMove[1], AI_TURN);
+                System.out.println("turn: Our Group     row: "+AIMove[1] + "     col: " + AIMove[2] + "        evaluation: "+ AIMove[0]);
+                httpHelper.makeMove((int)AIMove[1]+","+(int)AIMove[2]);
+                board.move((int)AIMove[1], (int)AIMove[2], AI_TURN);
                 printLog(aiPlayer);
 
                 //Reset the variables
