@@ -61,34 +61,46 @@ public class MDP {
     }
 
     public double[][] solve () {
-        North = DP(0);
-        East  = DP(1);
-        South = DP(2);
-        West  = DP(3);
 
+        double[][] check = new double[row][col];
         double[][] res = new double[row][col];
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                double temp1 = Math.max(North[i][j], East[i][j]);
-                double temp2 = Math.max(West[i][j], South[i][j]);
-                res[i][j] = Math.max(temp1,temp2);
+
+        int count = 0;
+        copy(grid, check);
+        copy(check, res);
+        while (count < 200) {
+        //while (!isSame(check, res) || count == 0) {
+            copy(res, check);
+            North = DP(0, check);
+            East  = DP(1, check);
+            South = DP(2, check);
+            West  = DP(3, check);
+
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    double temp1 = Math.max(North[i][j], East[i][j]);
+                    double temp2 = Math.max(West[i][j], South[i][j]);
+                    res[i][j] = Math.max(temp1,temp2);
+                }
             }
+            count++;
         }
+        System.out.println("count: " + count);
         return res;
     }
 
-    public double[][] DP (int dir) {
-        double p = noise[dir];
+    public double[][] DP (int dir, double[][] input) {
         double main_val;
         double noise_val1;
         double noise_val2;
-        int count = 0;
+        double noise_val3;
 
         double[][] temp  = new double[row][col];
-        copy(grid, temp);
-        double[][] check = new double[row][col];
-        while (!isSame(check, temp)) {
-            copy(temp,check);
+        copy(input,temp);
+        //copy(grid, temp);
+        //double[][] check = new double[row][col];
+        //while (!isSame(check, temp)) {
+            //copy(temp,check);
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < col; j++) {
                     if (!grid_string[i][j].equals("0")) {
@@ -101,16 +113,17 @@ public class MDP {
                     //get two noise direction val;
                     noise_val1 = getNext((dir+1) % 4, i, j, temp);
 
-                    noise_val2 = getNext((dir-1+4) % 4, i, j, temp);
+                    noise_val2 = getNext((dir+3) % 4, i, j, temp);
+
+                    noise_val3 = getNext((dir+2) % 4, i, j, temp);
 
                     //result
-                    temp[i][j] = (p * main_val + (1-p)/2 * noise_val1 + (1-p)/2 * noise_val2) * discount + reward;
+                    temp[i][j] = (noise[0] * main_val + noise[1] * noise_val1 + noise[2] * noise_val2 + noise[3] * noise_val3) * discount + reward;
 
                 }
             }
-            count++;
-        }
-        System.out.println("count: "+count);
+            //count++;
+        //}
         return temp;
     }
 
