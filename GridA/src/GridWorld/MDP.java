@@ -1,4 +1,4 @@
-import java.util.DoubleSummaryStatistics;
+package GridWorld;
 
 /**
  * Created by shaowenyuan on 2018/4/22.
@@ -16,7 +16,7 @@ public class MDP {
     public double[][]       South;
     public double[][]       West;
     public double[][]       East;
-    private int[][]         direction = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+    private int[][]         direction = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 
     public MDP (double discount, double[] noise, double reward) {
         getVal getVal = new getVal();
@@ -60,70 +60,51 @@ public class MDP {
         return East;
     }
 
-    public double[][] solve () {
-
-        double[][] check = new double[row][col];
-        double[][] res = new double[row][col];
-
-        int count = 0;
-        copy(grid, check);
-        copy(check, res);
-        while (count < 200) {
-        //while (!isSame(check, res) || count == 0) {
-            copy(res, check);
-            North = DP(0, check);
-            East  = DP(1, check);
-            South = DP(2, check);
-            West  = DP(3, check);
-
+    public double[][] MDPIteration () {
+        int iteration = 0;
+        double [][] input = new double[row][col];
+        double [][] pre   = new double[row][col];
+        copy(grid, pre);
+        copy(grid, input);
+        while (!isSame(input, pre) || iteration == 0) {
+            copy(input, pre);
+            North = DP(0,input);
+            //printState(North);
+            East  = DP(1,input);
+            //printState(East);
+            West  = DP(2,input);
+            //printState(West);
+            South = DP(3,input);
+            //printState(South);
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < col; j++) {
                     double temp1 = Math.max(North[i][j], East[i][j]);
                     double temp2 = Math.max(West[i][j], South[i][j]);
-                    res[i][j] = Math.max(temp1,temp2);
+
+                    input[i][j] = Math.max(temp1, temp2);
                 }
             }
-            count++;
+            iteration++;
         }
-        System.out.println("count: " + count);
-        return res;
+        System.out.println("After " + iteration + " times of iteration.");
+        return input;
     }
 
     public double[][] DP (int dir, double[][] input) {
-        double main_val;
-        double noise_val1;
-        double noise_val2;
-        double noise_val3;
-
+        double main_val = 0;
         double[][] temp  = new double[row][col];
-        copy(input,temp);
-        //copy(grid, temp);
-        //double[][] check = new double[row][col];
-        //while (!isSame(check, temp)) {
-            //copy(temp,check);
-            for (int i = 0; i < row; i++) {
-                for (int j = 0; j < col; j++) {
-                    if (!grid_string[i][j].equals("0")) {
-                        continue;
-                    }
-
-                    //get main direction val;
-                    main_val = getNext(dir, i, j, temp);
-
-                    //get two noise direction val;
-                    noise_val1 = getNext((dir+1) % 4, i, j, temp);
-
-                    noise_val2 = getNext((dir+3) % 4, i, j, temp);
-
-                    noise_val3 = getNext((dir+2) % 4, i, j, temp);
-
-                    //result
-                    temp[i][j] = (noise[0] * main_val + noise[1] * noise_val1 + noise[2] * noise_val2 + noise[3] * noise_val3) * discount + reward;
-
+        copy(grid,temp);
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (!grid_string[i][j].equals("0")) {
+                    continue;
+                }
+                for (int d = 0; d < 4; d++) {
+                    main_val = getNext((dir+d) % 4, i, j, input);
+                    temp[i][j] += noise[d] * (main_val * discount + reward);
                 }
             }
-            //count++;
-        //}
+        }
         return temp;
     }
 
@@ -152,5 +133,19 @@ public class MDP {
             return temp[r][c];
         } else
             return temp[temp_r][temp_c];
+    }
+
+    public void printState (double[][] state) {
+        for (int i = 0; i < state.length; i++) {
+            for (int j = 0; j < state[0].length; j++) {
+                if (state [i][j] == Integer.MIN_VALUE) {
+                    System.out.printf("%10s", "-");
+                } else {
+                    System.out.printf("%10.2f", state[i][j]);
+                }
+            }
+            System.out.println();
+        }
+        System.out.println("*************************************************************");
     }
 }
