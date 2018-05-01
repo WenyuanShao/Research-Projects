@@ -15,9 +15,6 @@ public class HMM {
                 {1.0 / 2,   1.0 / 8,   1.0 / 8},
                 {1.0 / 8,   1.0 / 2,   1.0 / 8},
                 {1.0 / 8,   1.0 / 8,   1.0 / 2}
-                /*{1.0 / 3,   1.0 / 6,   1.0 / 6},
-                {1.0 / 6,   1.0 / 3,   1.0 / 6},
-                {1.0 / 6,   1.0 / 6,   1.0 / 3}*/
         };
         this.emissionProb   = new double[][] {
                 {0.6,   0.2,   0.2},
@@ -36,7 +33,6 @@ public class HMM {
         for (int i = 0; i < ObservationSeq.length; i++) {
             ObservationSeq[i] = Integer.parseInt(tempS[i]);
         }
-        printSeq(ObservationSeq);
         int[] dieSeq = new int[ObservationSeq.length];
         // all of the possible sequence in a specific place.
         int[][] possibleSeq = new int[ObservationSeq.length][transitionProb.length];
@@ -68,15 +64,16 @@ public class HMM {
                 possibleSeq[i][j] = die;
             }
         }
-        printSeq(possibleSeq);
-        printSeq(proMatrix);
+        //printSeq(possibleSeq);
+        //printSeq(proMatrix);
 
         dieSeq[dieSeq.length-1] = getMax(proMatrix, proMatrix.length-1)+1;
         for (int i = dieSeq.length-2; i>= 0; i--) {
             dieSeq[i] = possibleSeq[i+1][dieSeq[i+1]-1]+1;
         }
+        System.out.println("Most possible dies sequence: ");
         printSeq(dieSeq);
-        System.out.println(proMatrix[10][1]);
+        //System.out.println(proMatrix[dieSeq.length-1][dieSeq[dieSeq.length-1]-1]);
         return null;
     }
 
@@ -127,8 +124,20 @@ public class HMM {
 
 class test {
     public static void main (String[] args) {
-        String input = "3, 3, 3, 1, 2, 3, 2, 2, 2, 2, 1";
+        String[] input = {
+                "1, 2, 3, 2, 1, 3, 2, 1, 3, 2, 3",
+                "1, 2, 1, 1, 1, 2, 3, 3, 1, 2, 3, 3, 1, 3, 3",
+                "3, 2, 3, 1, 1, 3",
+                "3, 2, 3, 1, 1, 2, 3",
+                "1, 2, 1, 1, 2, 1",
+                "3, 3, 3, 1, 2, 3, 2, 2, 2, 2, 1"
+        };
         HMM hmm = new HMM();
-        hmm.evaluate(input);
+        for (int i = 0; i < input.length; i++) {
+            System.out.println("Observation sequence: "+(i+1));
+            System.out.println(input[i]);
+            hmm.evaluate(input[i]);
+            System.out.println("************************************************");
+        }
     }
 }
