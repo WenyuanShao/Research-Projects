@@ -1,4 +1,4 @@
-+ The project is using minimax to create an AI chess player. The rule is like m tic-tac-toe int a n*n chess board.
++ The project is using minimax to create an AI chess player. The rule is like m tic-tac-toe in a n*n chess board.
 
 + The minimax class is dealing with the main portion of the searching algorithm. In the early experiments I found the speed of the pure minimax is too slow. As a result, I using alpha-beta pruning to reduce the branches of the search tree. 
 
